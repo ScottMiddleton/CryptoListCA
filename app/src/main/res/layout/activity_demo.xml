@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.crytpolistca.feature_currency_info.presentation.currency_list.CurrencyListViewModel" />
+            type="com.example.cryptolistca.feature_currency_info.presentation.currency_list.CurrencyListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

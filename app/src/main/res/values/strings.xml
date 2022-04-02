@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Crypto List Example</string>
+    <string name="app_name">Crypto List CA</string>
     <string name="load">Load</string>
     <string name="sort">Sort</string>
     <string name="empty_currency_list">Please load click \"LOAD\" to see the currency list</string>

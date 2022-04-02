@@ -7,7 +7,7 @@
 
         <variable
             name="currency_info_item"
-            type="com.example.crytpolistca.feature_currency_info.domain.model.CurrencyInfo" />
+            type="com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
