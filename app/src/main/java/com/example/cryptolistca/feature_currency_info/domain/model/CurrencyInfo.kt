@@ -8,5 +8,5 @@ data class CurrencyInfo(
     @PrimaryKey
     val id: String,
     val name: String,
-    val symbol: String,
+    val symbol: String
 )
