@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
-import com.example.cryptolistca.feature_currency_info.domain.use_case.GetCurrencyInfo
-import com.example.cryptolistca.feature_currency_info.domain.use_case.InsertCurrencyInfo
+import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases
 import com.example.cryptolistca.feature_currency_info.domain.util.OrderType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,8 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CurrencyListViewModel(
-    private val getCurrencyInfoUseCase: GetCurrencyInfo,
-    private val insertCurrencyInfoUseCase: InsertCurrencyInfo
+    private val currencyInfoUseCases: CurrencyInfoUseCases
 ) : ViewModel() {
 
     private var _currencyInfoLD = MutableLiveData<List<CurrencyInfo>>()
@@ -31,6 +29,9 @@ class CurrencyListViewModel(
 
     private var getCurrencyInfoJob: Job? = null
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    var currentOrderType: OrderType = OrderType.Unsorted
+
     init {
         getCurrencyInfo(OrderType.Unsorted)
     }
@@ -40,8 +41,9 @@ class CurrencyListViewModel(
             isLoading(true)
 
             withContext(Dispatchers.IO) {
-                insertCurrencyInfoUseCase()
+                currencyInfoUseCases.insertCurrencyInfo()
                 getCurrencyInfo(OrderType.Unsorted)
+                currentOrderType = OrderType.Unsorted
             }
 
             isLoading(false)
@@ -53,7 +55,13 @@ class CurrencyListViewModel(
             isLoading(true)
 
             withContext(Dispatchers.IO) {
-                getCurrencyInfo(OrderType.NameAscending)
+                val newOrderType: OrderType = when (currentOrderType) {
+                    OrderType.NameAscending -> OrderType.NameDescending
+                    OrderType.Unsorted -> OrderType.NameAscending
+                    OrderType.NameDescending -> OrderType.NameAscending
+                }
+                getCurrencyInfo(newOrderType)
+                currentOrderType = newOrderType
             }
 
             isLoading(false)
@@ -62,7 +70,7 @@ class CurrencyListViewModel(
 
     private fun getCurrencyInfo(orderType: OrderType) {
         getCurrencyInfoJob?.cancel()
-        getCurrencyInfoJob = getCurrencyInfoUseCase(orderType)
+        getCurrencyInfoJob = currencyInfoUseCases.getCurrencyInfo(orderType)
             .onEach { currencyInfo ->
                 _currencyInfoLD.value = currencyInfo
             }

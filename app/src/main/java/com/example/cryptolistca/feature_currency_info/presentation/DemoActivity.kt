@@ -41,11 +41,13 @@ class DemoActivity : AppCompatActivity() {
     private fun setupObserver() {
         viewModel.initLoadingUI.observe(this) {
             if (it) {
+                binding.loadingPb.visibility = VISIBLE
                 binding.loadBtn.isClickable = false
                 binding.sortBtn.isClickable = false
             } else {
                 binding.loadBtn.isClickable = true
                 binding.sortBtn.isClickable = true
+                binding.loadingPb.visibility = GONE
             }
         }
     }

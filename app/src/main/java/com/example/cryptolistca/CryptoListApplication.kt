@@ -1,7 +1,7 @@
 package com.example.cryptolistca
 
 import android.app.Application
-import com.example.cryptolistca.feature_currency_info.di.appModule
+import com.example.cryptolistca.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

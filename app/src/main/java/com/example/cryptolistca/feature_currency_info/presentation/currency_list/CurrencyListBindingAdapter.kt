@@ -1,4 +1,4 @@
-package com.example.cryptolistca.feature_currency_info.presentation
+package com.example.cryptolistca.feature_currency_info.presentation.currency_list
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

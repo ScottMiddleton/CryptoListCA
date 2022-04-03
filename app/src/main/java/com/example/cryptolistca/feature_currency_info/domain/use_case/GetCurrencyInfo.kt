@@ -18,6 +18,9 @@ class GetCurrencyInfo(
                 is OrderType.NameAscending -> {
                     currencyInfo.sortedBy { it.name.lowercase() }
                 }
+                OrderType.NameDescending -> {
+                    currencyInfo.sortedByDescending { it.name.lowercase() }
+                }
             }
         }
     }
