@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/initial_tv"
-                style="@style/TitleRegWhite"
+                style="@style/TitleReg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/name_tv"
-            style="@style/TitleRegBlack"
+            style="@style/TitleReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -55,7 +55,7 @@
 
         <TextView
             android:id="@+id/symbol_tv"
-            style="@style/SubtitleRegBlack"
+            style="@style/SubtitleReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
