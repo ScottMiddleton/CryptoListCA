@@ -16,11 +16,10 @@ issue when do sorting (like fast double clicking of sorting button)
 - Unit test is welcome
 
 ## Implementation
-The application follows an MVVM, clean architecture pattern and I have used Koin for dependency injection. The architecure setup for this project has
-been built with the intention that the application could easily scale should additional features be included. 
+The application follows an MVVM, clean architecture pattern and I have used Koin for dependency injection. The architecure setup for this project has been built with the intention that the application could easily scale should additional features be included. 
 
-The DemoActivity provides 2 buttons, both of which communicate with the CurrencyListViewmodel, utilising data binding. The "LOAD" button will insert CurrencyInfo into the observed room database, and cosequently displays an unsorted list. The "SORT" button will order the list by currency name, toggling by ascending and descending upon multiple clicks.
+The DemoActivity provides two buttons, both of which communicate with the CurrencyListViewmodel utilising data binding. The "LOAD" button will insert CurrencyInfo into the observed room database, and consequently displays an unsorted list. The "SORT" button will order the list by currency name, toggling by ascending and descending upon multiple clicks.
 
 The CurrencyListViewmodel is shared with the CurrencyListFragment to easily handle data communication between the Activity and Fragment. A Room database has been setup for local storage of CurrencyInfo, from which the data is retrieved using Flow. Multi-threading is handled with a combination of Coroutines and Flow. 
 
-Unit tests are provided for the GetCurrencyInfo use case as a testing example.
+Unit tests are provided for the GetCurrencyInfo use case as a testing example. Should more screens be added it would be useful to integrate Jetpack's Navigation component, with which I have experience. However, for a single screen application, I felt it would be unnecessary in this instance.
