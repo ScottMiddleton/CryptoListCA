@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CurrencyRepository {
 
-    suspend fun insertCurrencyInfoList()
+    suspend fun insertCurrencyInfoList(currencyInfoList: List<CurrencyInfo>)
 
     fun getCurrencyInfoList(): Flow<List<CurrencyInfo>>
 }

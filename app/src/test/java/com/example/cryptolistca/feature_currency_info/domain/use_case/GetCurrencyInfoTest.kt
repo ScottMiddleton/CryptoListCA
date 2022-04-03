@@ -1,6 +1,7 @@
 package com.example.cryptolistca.feature_currency_info.domain.use_case
 
 import com.example.cryptolistca.feature_currency_info.data.repository.FakeCurrencyRepository
+import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.util.OrderType
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
@@ -19,7 +20,24 @@ class GetCurrencyInfoTest {
         getCurrencyInfoUseCase = GetCurrencyInfo(fakeRepository)
 
         runBlocking {
-            fakeRepository.insertCurrencyInfoList()
+            val currencyInfoList = mutableListOf<CurrencyInfo>()
+
+            currencyInfoList.add(CurrencyInfo("BTC", "Bitcoin", "BTC"))
+            currencyInfoList.add(CurrencyInfo("ETH", "Ethereum", "ETH"))
+            currencyInfoList.add(CurrencyInfo("XRP", "XRP", "XRP"))
+            currencyInfoList.add(CurrencyInfo("BCH", "Bitcoin Cash", "BCH"))
+            currencyInfoList.add(CurrencyInfo("LTC", "Litecoin", "LTC"))
+            currencyInfoList.add(CurrencyInfo("EOS", "EOS", "EOS"))
+            currencyInfoList.add(CurrencyInfo("BNB", "Binance Coin", "BNB"))
+            currencyInfoList.add(CurrencyInfo("LINK", "Chainlink", "LINK"))
+            currencyInfoList.add(CurrencyInfo("NEO", "NEO", "NEO"))
+            currencyInfoList.add(CurrencyInfo("ETC", "Ethereum Classic", "ETC"))
+            currencyInfoList.add(CurrencyInfo("ONT", "Ontology", "ONT"))
+            currencyInfoList.add(CurrencyInfo("CRO", "Crypto.com Chain", "CRO"))
+            currencyInfoList.add(CurrencyInfo("CUC", "Cucumber", "CUC"))
+            currencyInfoList.add(CurrencyInfo("USDC", "USD Coin", "USDC"))
+
+            fakeRepository.insertCurrencyInfoList(currencyInfoList)
         }
     }
 

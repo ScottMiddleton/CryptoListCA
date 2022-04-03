@@ -27,23 +27,17 @@ class CurrencyListViewModel(
     val initLoadingUI: LiveData<Boolean>
         get() = _initLoadingUI
 
-    private var getCurrencyInfoJob: Job? = null
+    private var currencyInfoJob: Job? = null
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var currentOrderType: OrderType = OrderType.Unsorted
-
-    init {
-        getCurrencyInfo(OrderType.Unsorted)
-    }
 
     fun onLoad() {
         viewModelScope.launch {
             isLoading(true)
 
             withContext(Dispatchers.IO) {
-                currencyInfoUseCases.insertCurrencyInfo()
                 getCurrencyInfo(OrderType.Unsorted)
-                currentOrderType = OrderType.Unsorted
             }
 
             isLoading(false)
@@ -61,7 +55,6 @@ class CurrencyListViewModel(
                     OrderType.NameDescending -> OrderType.NameAscending
                 }
                 getCurrencyInfo(newOrderType)
-                currentOrderType = newOrderType
             }
 
             isLoading(false)
@@ -69,12 +62,19 @@ class CurrencyListViewModel(
     }
 
     private fun getCurrencyInfo(orderType: OrderType) {
-        getCurrencyInfoJob?.cancel()
-        getCurrencyInfoJob = currencyInfoUseCases.getCurrencyInfo(orderType)
+        currencyInfoJob?.cancel()
+        currencyInfoJob = currencyInfoUseCases.getCurrencyInfo(orderType)
             .onEach { currencyInfo ->
                 _currencyInfoLD.value = currencyInfo
+                currentOrderType = orderType
             }
             .launchIn(viewModelScope)
+    }
+
+    fun insertCurrencyInfo(currencyInfoList: List<CurrencyInfo>) {
+        viewModelScope.launch {
+            currencyInfoUseCases.insertCurrencyInfo(currencyInfoList)
+        }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
