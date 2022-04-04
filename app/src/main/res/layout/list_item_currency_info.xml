@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="currency_info_item"
             type="com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo" />

@@ -1,6 +1,5 @@
 package com.example.cryptolistca.feature_currency_info.presentation.currency_list
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,8 +28,7 @@ class CurrencyListViewModel(
 
     private var currencyInfoJob: Job? = null
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    var currentOrderType: OrderType = OrderType.Unsorted
+    private var currentOrderType: OrderType = OrderType.Unsorted
 
     fun onLoad() {
         viewModelScope.launch {
@@ -77,8 +75,7 @@ class CurrencyListViewModel(
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun isLoading(loading: Boolean) {
+    private fun isLoading(loading: Boolean) {
         _initLoadingUI.value = loading
     }
 }
