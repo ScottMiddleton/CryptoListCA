@@ -16,7 +16,7 @@ issue when do sorting (like fast double clicking of sorting button)
 - Unit test is welcome
 
 ## Implementation
-The application follows an MVVM, clean architecture pattern and I have used Koin for dependency injection. The architecure setup for this project has been built with the intention that the application could easily scale should additional features be included. 
+The application follows an MVVM, clean architecture pattern and I have used Koin for dependency injection. The architecture setup for this project has been built with the intention that the application could easily scale should additional features be included. 
 
 The DemoActivity provides two buttons, both of which communicate with the CurrencyListViewmodel utilising data binding. The "LOAD" button will access the CurrencyInfo from the database, and consequently display it in an unsorted list. The "SORT" button will order the list by currency name, toggling by ascending and descending upon multiple clicks.
 

@@ -1,6 +1,5 @@
 package com.example.cryptolistca.feature_currency_info.presentation.currency_list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,10 @@ import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases
 import com.example.cryptolistca.feature_currency_info.domain.util.OrderType
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -18,9 +20,8 @@ class CurrencyListViewModel(
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
-    private var _currencyInfoLD = MutableLiveData<List<CurrencyInfo>>()
-    val currencyInfoLD: LiveData<List<CurrencyInfo>>
-        get() = _currencyInfoLD
+    private var _currencyInfoFlow = MutableStateFlow<List<CurrencyInfo>>(emptyList())
+    val currencyInfoFlow = _currencyInfoFlow.asStateFlow()
 
     private var _initLoadingUI = MutableLiveData(false)
     val initLoadingUI = _initLoadingUI
@@ -30,7 +31,7 @@ class CurrencyListViewModel(
     var currentOrderType: OrderType = OrderType.Unsorted
 
     fun onLoad() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.main) {
             isLoading(true)
 
             withContext(dispatchers.io) {
@@ -42,7 +43,7 @@ class CurrencyListViewModel(
     }
 
     fun onSort() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.main) {
             isLoading(true)
 
             withContext(dispatchers.io) {
@@ -62,14 +63,14 @@ class CurrencyListViewModel(
         currencyInfoJob?.cancel()
         currencyInfoJob = currencyInfoUseCases.getCurrencyInfo(orderType)
             .onEach { currencyInfo ->
-                _currencyInfoLD.value = currencyInfo
+                _currencyInfoFlow.value = currencyInfo
                 currentOrderType = orderType
             }
             .launchIn(viewModelScope)
     }
 
     fun insertCurrencyInfo(currencyInfoList: List<CurrencyInfo>) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.main) {
             currencyInfoUseCases.insertCurrencyInfo(currencyInfoList)
         }
     }

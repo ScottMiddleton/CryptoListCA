@@ -1,6 +1,8 @@
 package com.example.cryptolistca.feature_currency_info.presentation.currency_list
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.cash.turbine.test
 import com.example.cryptolistca.feature_currency_info.data.repository.FakeCurrencyRepository
 import com.example.cryptolistca.feature_currency_info.di.TestDispatchers
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
@@ -12,6 +14,7 @@ import com.example.cryptolistca.feature_currency_info.utils.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -23,6 +26,9 @@ class CurrencyListViewModelTest {
     private lateinit var insertCurrencyUseCase: InsertCurrencyInfo
     private lateinit var repository: FakeCurrencyRepository
     private lateinit var dispatchers: TestDispatchers
+
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
@@ -77,38 +83,51 @@ class CurrencyListViewModelTest {
     }
 
     @Test
-    fun onLoad_getCurrencyInfo_unsorted() {
-            viewModel.onLoad()
-            val value = viewModel.currencyInfoLD.getOrAwaitValue()
-            assertThat(value).isNotEmpty()
+    fun onLoad_getCurrencyInfo_unsorted() = runBlocking {
+        viewModel.onLoad()
+
+        viewModel.currencyInfoFlow.test {
+            assertThat(awaitItem()).isNotEmpty()
+            cancelAndConsumeRemainingEvents()
+        }
     }
 
     @Test
-    fun onSort_getCurrencyInfo_sortedAscending() {
+    fun onSort_getCurrencyInfo_sortedAscending() = runBlocking {
         viewModel.currentOrderType = OrderType.NameDescending
         viewModel.onSort()
-        val value = viewModel.currencyInfoLD.getOrAwaitValue()
 
-        for (i in 0..value.size - 2) {
-            assertThat(value[i].name).isLessThan(value[i + 1].name)
+        viewModel.currencyInfoFlow.test {
+            val emission = awaitItem()
+            for (i in 0..emission.size - 2) {
+                assertThat(emission[i].name).isLessThan(emission[i + 1].name)
+            }
+            cancelAndConsumeRemainingEvents()
         }
     }
 
     @Test
-    fun onSort_toggleAscendingToDescending() {
+    fun onSort_toggleAscendingToDescending() = runBlocking {
         viewModel.currentOrderType = OrderType.Unsorted
-        viewModel.onSort()
-        val valueAscending = viewModel.currencyInfoLD.getOrAwaitValue()
 
-        for (i in 0..valueAscending.size - 2) {
-            assertThat(valueAscending[i].name).isLessThan(valueAscending[i + 1].name)
+        viewModel.onSort()
+
+        viewModel.currencyInfoFlow.test {
+            val emission = awaitItem()
+            for (i in 0..emission.size - 2) {
+                assertThat(emission[i].name).isLessThan(emission[i + 1].name)
+            }
+            cancelAndConsumeRemainingEvents()
         }
 
         viewModel.onSort()
-        val valueDescending = viewModel.currencyInfoLD.getOrAwaitValue()
 
-        for (i in 0..valueDescending.size - 2) {
-            assertThat(valueDescending[i].name).isGreaterThan(valueDescending[i + 1].name)
+        viewModel.currencyInfoFlow.test {
+            val emission = awaitItem()
+            for (i in 0..emission.size - 2) {
+                assertThat(emission[i].name).isGreaterThan(emission[i + 1].name)
+            }
+            cancelAndConsumeRemainingEvents()
         }
     }
 }

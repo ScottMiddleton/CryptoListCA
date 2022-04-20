@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptolistca.R
 import com.example.cryptolistca.databinding.FragmentCurrencyListBinding
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -83,15 +82,18 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun setupObserver() {
-        viewModel.currencyInfoLD.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                binding.emptyListTv.visibility = View.GONE
-            } else {
-                binding.emptyListTv.visibility = View.VISIBLE
-            }
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.currencyInfoFlow.collectLatest {
+                    if (it.isNotEmpty()) {
+                        binding.emptyListTv.visibility = View.GONE
+                    } else {
+                        binding.emptyListTv.visibility = View.VISIBLE
+                    }
 
-            adapter.submitList(it)
+                    adapter.submitList(it)
+                }
+            }
         }
     }
-
 }
