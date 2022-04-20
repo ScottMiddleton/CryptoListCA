@@ -3,6 +3,8 @@ package com.example.cryptolistca.di
 import androidx.room.Room
 import com.example.cryptolistca.feature_currency_info.data.data_source.CurrencyDatabase
 import com.example.cryptolistca.feature_currency_info.data.repository.CurrencyRepositoryImpl
+import com.example.cryptolistca.feature_currency_info.data.repository.DefaultDispatchers
+import com.example.cryptolistca.feature_currency_info.data.repository.DispatcherProvider
 import com.example.cryptolistca.feature_currency_info.domain.repository.CurrencyRepository
 import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases
 import com.example.cryptolistca.feature_currency_info.domain.use_case.GetCurrencyInfo
@@ -30,6 +32,9 @@ val appModule = module {
     // Repositories
     single<CurrencyRepository> { CurrencyRepositoryImpl(get()) }
 
+    //Dispatchers
+    single<DispatcherProvider> { DefaultDispatchers() }
+
     // UseCases
     single {
         CurrencyInfoUseCases(
@@ -39,6 +44,6 @@ val appModule = module {
     }
 
     // ViewModels
-    viewModel { CurrencyListViewModel(get()) }
+    viewModel { CurrencyListViewModel(get(), get()) }
 }
 
