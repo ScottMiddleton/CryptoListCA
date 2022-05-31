@@ -1,7 +1,7 @@
 package com.example.cryptolistca.di
 
 import androidx.room.Room
-import com.example.cryptolistca.feature_currency_info.data.data_source.CurrencyDatabase
+import com.example.cryptolistca.feature_currency_info.data.local.CurrencyDatabase
 import com.example.cryptolistca.feature_currency_info.data.repository.CurrencyRepositoryImpl
 import com.example.cryptolistca.feature_currency_info.data.repository.DefaultDispatchers
 import com.example.cryptolistca.feature_currency_info.data.repository.DispatcherProvider

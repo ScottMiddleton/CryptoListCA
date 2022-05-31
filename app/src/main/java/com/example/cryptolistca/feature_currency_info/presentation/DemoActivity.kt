@@ -9,6 +9,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.cryptolistca.R
 import com.example.cryptolistca.databinding.ActivityDemoBinding
+import com.example.cryptolistca.feature_currency_info.data.local.entity.CurrencyInfoEntity
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.presentation.currency_list.CurrencyListFragment
 import com.example.cryptolistca.feature_currency_info.presentation.currency_list.CurrencyListViewModel
@@ -65,11 +66,7 @@ class DemoActivity : AppCompatActivity() {
         viewModel.initLoadingUI.observe(this) {
             if (it) {
                 binding.loadingPb.visibility = VISIBLE
-                binding.loadBtn.isClickable = false
-                binding.sortBtn.isClickable = false
             } else {
-                binding.loadBtn.isClickable = true
-                binding.sortBtn.isClickable = true
                 binding.loadingPb.visibility = GONE
             }
         }
