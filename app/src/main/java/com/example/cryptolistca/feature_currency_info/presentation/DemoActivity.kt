@@ -9,7 +9,6 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.cryptolistca.R
 import com.example.cryptolistca.databinding.ActivityDemoBinding
-import com.example.cryptolistca.feature_currency_info.data.local.entity.CurrencyInfoEntity
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.presentation.currency_list.CurrencyListFragment
 import com.example.cryptolistca.feature_currency_info.presentation.currency_list.CurrencyListViewModel

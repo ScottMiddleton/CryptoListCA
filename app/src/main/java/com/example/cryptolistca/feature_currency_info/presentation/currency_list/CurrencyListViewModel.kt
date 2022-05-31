@@ -3,7 +3,6 @@ package com.example.cryptolistca.feature_currency_info.presentation.currency_lis
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptolistca.feature_currency_info.data.local.entity.CurrencyInfoEntity
 import com.example.cryptolistca.feature_currency_info.data.repository.DispatcherProvider
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases

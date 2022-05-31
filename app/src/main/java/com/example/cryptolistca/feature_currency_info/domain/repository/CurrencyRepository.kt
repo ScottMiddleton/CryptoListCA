@@ -1,6 +1,5 @@
 package com.example.cryptolistca.feature_currency_info.domain.repository
 
-import com.example.cryptolistca.feature_currency_info.data.local.entity.CurrencyInfoEntity
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import kotlinx.coroutines.flow.Flow
 
