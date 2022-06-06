@@ -82,8 +82,9 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun setupObserver() {
+        // Start a coroutine in the lifecycle scope
         lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.currencyInfoFlow.collectLatest {
                     if (it.isNotEmpty()) {
                         binding.emptyListTv.visibility = View.GONE

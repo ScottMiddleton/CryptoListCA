@@ -1,7 +1,7 @@
 package com.example.cryptolistca
 
 import android.app.Application
-import com.example.cryptolistca.di.appModule
+import com.example.cryptolistca.feature_currency_info.domain.di.currencyInfoModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,7 +11,7 @@ open class CryptoListApplication : Application() {
 
         startKoin {
             androidContext(this@CryptoListApplication)
-            modules(appModule)
+            modules(currencyInfoModule)
         }
     }
 }

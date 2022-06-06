@@ -1,4 +1,4 @@
-package com.example.cryptolistca.di
+package com.example.cryptolistca.feature_currency_info.domain.di
 
 import androidx.room.Room
 import com.example.cryptolistca.feature_currency_info.data.local.CurrencyDatabase
@@ -14,7 +14,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule = module {
+val currencyInfoModule = module {
     // Room
     single {
         Room.databaseBuilder(
