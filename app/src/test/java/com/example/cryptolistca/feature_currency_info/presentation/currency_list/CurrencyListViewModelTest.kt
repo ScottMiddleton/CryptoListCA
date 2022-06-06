@@ -4,12 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.cash.turbine.test
 import com.example.cryptolistca.feature_currency_info.data.repository.FakeCurrencyRepository
-import com.example.cryptolistca.feature_currency_info.di.TestDispatchers
 import com.example.cryptolistca.feature_currency_info.domain.model.CurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases
 import com.example.cryptolistca.feature_currency_info.domain.use_case.GetCurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.use_case.InsertCurrencyInfo
 import com.example.cryptolistca.feature_currency_info.domain.util.OrderType
+import com.example.cryptolistca.feature_currency_info.domain.util.TestDispatchers
 import com.example.cryptolistca.feature_currency_info.utils.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking

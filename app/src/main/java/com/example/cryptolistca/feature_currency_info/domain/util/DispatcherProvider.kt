@@ -1,4 +1,4 @@
-package com.example.cryptolistca.feature_currency_info.data.repository
+package com.example.cryptolistca.feature_currency_info.domain.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

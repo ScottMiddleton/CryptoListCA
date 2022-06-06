@@ -1,6 +1,5 @@
-package com.example.cryptolistca.feature_currency_info.di
+package com.example.cryptolistca.feature_currency_info.domain.util
 
-import com.example.cryptolistca.feature_currency_info.data.repository.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher

@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/circular_background.xml" value="0.10740740740740741" />
+        <entry key="app/src/main/res/drawable/circular_background.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="app/src/main/res/layout/activity_demo.xml" value="0.13425925925925927" />
-        <entry key="app/src/main/res/layout/fragment_currency_list.xml" value="0.1398148148148148" />
+        <entry key="app/src/main/res/layout/fragment_currency_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_currency_info.xml" value="0.15092592592592594" />
       </map>
     </option>

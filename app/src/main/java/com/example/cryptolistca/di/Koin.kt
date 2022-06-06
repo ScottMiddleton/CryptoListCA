@@ -3,8 +3,8 @@ package com.example.cryptolistca.di
 import androidx.room.Room
 import com.example.cryptolistca.feature_currency_info.data.local.CurrencyDatabase
 import com.example.cryptolistca.feature_currency_info.data.repository.CurrencyRepositoryImpl
-import com.example.cryptolistca.feature_currency_info.data.repository.DefaultDispatchers
-import com.example.cryptolistca.feature_currency_info.data.repository.DispatcherProvider
+import com.example.cryptolistca.feature_currency_info.domain.util.DefaultDispatchers
+import com.example.cryptolistca.feature_currency_info.domain.util.DispatcherProvider
 import com.example.cryptolistca.feature_currency_info.domain.repository.CurrencyRepository
 import com.example.cryptolistca.feature_currency_info.domain.use_case.CurrencyInfoUseCases
 import com.example.cryptolistca.feature_currency_info.domain.use_case.GetCurrencyInfo
